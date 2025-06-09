@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-center">
                 <div>
-                    <img src="{{ asset('storage/img/logo.jpg') }}" alt="Logo" width="120">
+                    <img src="https://autoescolavip.com.br/wp-content/uploads/2022/01/WhatsApp_Image_2022-01-27_at_11.03.42-removebg-preview.png" alt="Logo" width="120">
                 </div>
             </div>
 
