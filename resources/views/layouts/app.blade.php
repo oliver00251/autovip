@@ -27,12 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                         </li>
-                        <li class="nav-item">
+                       {{--  <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">Perfil</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> --}}
+                       {{--  <li class="nav-item">
                             <a class="nav-link" href="{{ route('settings') }}">Configurações</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="ms-auto d-flex align-items-center">
                         <span class="text-white me-3">Olá, {{ Auth::user()->name }}</span>
