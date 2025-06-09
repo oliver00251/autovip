@@ -56,7 +56,7 @@
         <div class="row">
             @auth
                 {{-- Sidebar --}}
-                <aside class="col-md-2 bg-light p-3 border-end" style="min-height: 100vh;">
+                <aside class="col-md-2 bg-light d-none d-md-block p-3 border-end" style="min-height: 100vh;">
                     @include('layouts.sidebar')
                 </aside>
             @endauth
