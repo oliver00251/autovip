@@ -14,7 +14,7 @@
             <i class="bi bi-speedometer2"></i> Dashboard
         </a>
         <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('cadastro.index') }}">
-            <i class="bi bi-speedometer2"></i> Gerenciar
+            <i class="bi bi-speedometer2"></i> Cadastro
         </a>
     </li>
 

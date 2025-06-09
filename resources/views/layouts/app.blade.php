@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,34 +9,56 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     @stack('styles')
 </head>
+
 <body>
     {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Autoescola</a>
-            
-            <div class="ms-auto d-flex align-items-center">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
                 @auth
-                    <span class="text-white me-3">Olá, {{ Auth::user()->name }}</span>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
-                    </form>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('profile') }}">Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('settings') }}">Configurações</a>
+                        </li>
+                    </ul>
+                    <div class="ms-auto d-flex align-items-center">
+                        <span class="text-white me-3">Olá, {{ Auth::user()->name }}</span>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
+                        </form>
+                    </div>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">Login</a>
+                    <div class="ms-auto d-flex align-items-center">
+                        <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">Login</a>
+                    </div>
                 @endauth
             </div>
         </div>
     </nav>
-    
+
+
 
     <div class="container-fluid">
         <div class="row">
             @auth
-            {{-- Sidebar --}}
-            <aside class="col-md-2 bg-light p-3 border-end" style="min-height: 100vh;">
-                @include('layouts.sidebar')
-            </aside>
+                {{-- Sidebar --}}
+                <aside class="col-md-2 bg-light p-3 border-end" style="min-height: 100vh;">
+                    @include('layouts.sidebar')
+                </aside>
             @endauth
 
             {{-- Conteúdo principal --}}
@@ -54,14 +77,16 @@
     @stack('scripts')
     <style>
         .bg-dark {
-    --bs-bg-opacity: 1;
-    background-color: #2C2C74 !important
-    }
-    th {
-        background: #0d6efd !important;
-        color: #fff !important;
-    }
+            --bs-bg-opacity: 1;
+            background-color: #2C2C74 !important
+        }
+
+        th {
+            background: #0d6efd !important;
+            color: #fff !important;
+        }
     </style>
 
 </body>
+
 </html>
