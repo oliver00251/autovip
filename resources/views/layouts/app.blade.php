@@ -92,36 +92,8 @@
             color: #fff !important;
         }
     </style>
-<button id="btnInstall" style="display:none; position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; background:#1e90ff; color:#fff; border:none; border-radius:5px; cursor:pointer; z-index: 9999;">
-  Instalar App
-</button>
 
 </body>
-<script>
-let deferredPrompt;
-const btnInstall = document.getElementById('btnInstall');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();  // Previne o prompt automático
-  deferredPrompt = e;  // Guarda o evento pra disparar depois
-  btnInstall.style.display = 'block';  // Mostra o botão
-});
-
-btnInstall.addEventListener('click', async () => {
-  btnInstall.style.display = 'none';  // Esconde o botão
-  if (deferredPrompt) {
-    deferredPrompt.prompt();  // Dispara o prompt de instalação
-    const choiceResult = await deferredPrompt.userChoice;
-    if (choiceResult.outcome === 'accepted') {
-      console.log('Usuário aceitou a instalação');
-    } else {
-      console.log('Usuário recusou a instalação');
-    }
-    deferredPrompt = null;
-  }
-});
-</script>
-
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
