@@ -3,7 +3,7 @@
 @section('title', 'Login - Autoescola')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+<div class="container d-flex justify-content-center align-items-center" id="div_form">
     <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%; border-radius: 8px;">
         <div class="card-body">
             <div class="d-flex justify-content-center">
@@ -51,3 +51,15 @@
     </div>
 </div>
 @endsection
+<style>
+    #div_form {
+    height: 100vh;
+}
+
+@media (max-width: 576px) {
+    #div_form {
+        height: 70vh;
+    }
+}
+
+</style>
