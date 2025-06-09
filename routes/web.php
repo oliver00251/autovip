@@ -25,8 +25,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('alunos', AlunoController::class);
     Route::resource('funcionarios', FuncionarioController::class);
 
-
-
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
