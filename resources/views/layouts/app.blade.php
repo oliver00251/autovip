@@ -76,7 +76,10 @@
             <main class="col-md p-4">
                 <h4 class="mb-4">@yield('page-title')</h4>
                 @yield('content')
+                <button id="install-button" style="display: none;">Instalar App</button>
+
             </main>
+            
         </div>
     </div>
 
@@ -107,6 +110,35 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.error('Falha no SW:', err));
   });
 }
+
+let deferredPrompt;
+const installButton = document.getElementById('install-button');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Impede o prompt automático
+  e.preventDefault();
+  deferredPrompt = e;
+  // Exibe o botão
+  installButton.style.display = 'block';
+});
+
+installButton.addEventListener('click', () => {
+  // Esconde o botão
+  installButton.style.display = 'none';
+  // Mostra o prompt de instalação
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('Usuário aceitou instalar o app');
+      } else {
+        console.log('Usuário recusou instalar o app');
+      }
+      deferredPrompt = null;
+    });
+  }
+});
+
 </script>
 
 </html>
