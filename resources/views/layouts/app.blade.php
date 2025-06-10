@@ -99,6 +99,21 @@
             background: #0d6efd !important;
             color: #fff !important;
         }
+
+        #install-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1e90ff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 9999;
+}
+
     </style>
 
 </body>
