@@ -76,7 +76,7 @@
             <main class="col-md p-4">
                 <h4 class="mb-4">@yield('page-title')</h4>
                 @yield('content')
-                <button id="install-button btn btn-primary mt-1" style="display: none;">Instalar App</button>
+                <button id="install-button" style="display: none;">Instalar App</button>
 
             </main>
             
