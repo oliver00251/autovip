@@ -13,7 +13,7 @@ class CadastroController extends Controller
     {
         $permissao = Role::get();
         $alunos = Aluno::all();
-        $instrutores = Funcionario::where('tipo', 'Instrutor')->get();
+        $instrutores = Funcionario::get();
         return view('cadastro.index', compact('permissao','alunos','instrutores'));
     }
 }

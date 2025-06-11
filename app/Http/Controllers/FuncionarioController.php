@@ -35,8 +35,8 @@ class FuncionarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
- 
-    
+
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -47,20 +47,20 @@ class FuncionarioController extends Controller
             'permissao' => 'required',
             'codigo_filial' => 'required',
         ]);
-    
-       
+
+
         $cpfNumeros = preg_replace('/\D/', '', $validated['cpf']);
         $senha = '@mudar' . substr($cpfNumeros, 0, 6);
-    
+
         // Cria o usuário
         $user = User::create([
             'name' => $validated['nome'],
             'email' => $validated['email'],
             'password' => Hash::make($senha),
-            'role' => $validated['permissao'], 
+            'role' => $validated['permissao'],
             'codigo_filial' => $validated['codigo_filial'],
         ]);
-    
+
         // Cria o funcionário (associado ao user, se houver relacionamento)
         $funcionario = Funcionario::create([
             'nome' => $validated['nome'],
@@ -71,11 +71,44 @@ class FuncionarioController extends Controller
             'codigo_filial' => $validated['codigo_filial'],
             'user_id' => $user->id,
         ]);
-    
+
         return response()->json(['message' => 'Funcionário cadastrado com sucesso!']);
     }
-    
 
+    public function update(Request $request, $id)
+    {
+        // Valida rápido
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'cpf' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'codigo_filial' => 'required|string|max:50',
+            'tipo' => 'required|string|max:50',
+            'permissao' => 'required|string|max:50',
+        ]);
+
+        $instrutor = Funcionario::find($id);
+        if (!$instrutor) {
+            return response()->json(['message' => 'Funcionário não encontrado.'], 404);
+        }
+
+        $instrutor->update($validated);
+
+        return response()->json(['message' => 'Funcionário atualizado com sucesso.']);
+    }
+
+    // Deleta o instrutor (DELETE)
+    public function destroy($id)
+    {
+        $instrutor = Funcionario::find($id);
+        if (!$instrutor) {
+            return response()->json(['message' => 'Instrutor não encontrado.'], 404);
+        }
+
+        $instrutor->delete();
+
+        return response()->json(['message' => 'Instrutor excluído com sucesso.']);
+    }
     /**
      * Display the specified resource.
      *
@@ -105,10 +138,7 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+  
 
     /**
      * Remove the specified resource from storage.
@@ -116,8 +146,5 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+   
 }

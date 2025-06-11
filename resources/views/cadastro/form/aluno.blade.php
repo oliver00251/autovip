@@ -59,7 +59,7 @@
 <!-- SweetAlert2 + AJAX Script -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-document.getElementById('formAluno').addEventListener('submit', async function(e) {
+    document.getElementById('formAluno').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const form = e.target;
@@ -81,6 +81,8 @@ document.getElementById('formAluno').addEventListener('submit', async function(e
                 icon: 'success',
                 title: 'Aluno cadastrado!',
                 text: result.message || 'Cadastro realizado com sucesso.',
+                showConfirmButton: false,
+                timer: 1500
             });
 
             // Fecha o modal
@@ -90,6 +92,11 @@ document.getElementById('formAluno').addEventListener('submit', async function(e
 
             // Reseta o form
             form.reset();
+
+            // Aguarda o fechamento da modal antes de recarregar
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
         } else if (response.status === 422) {
             const result = await response.json();
             const errors = Object.values(result.errors).flat().join('\n');
@@ -115,4 +122,5 @@ document.getElementById('formAluno').addEventListener('submit', async function(e
         });
     }
 });
+
 </script>

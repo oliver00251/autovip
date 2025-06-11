@@ -105,6 +105,8 @@ document.getElementById('formFuncionario').addEventListener('submit', async func
                 icon: 'success',
                 title: 'Funcionário cadastrado!',
                 text: result.message || 'Cadastro realizado com sucesso.',
+                showConfirmButton: false,
+                timer: 1500
             });
 
             // Fecha o modal
@@ -114,6 +116,11 @@ document.getElementById('formFuncionario').addEventListener('submit', async func
 
             // Reseta o form
             form.reset();
+
+            // Aguarda o fechamento da modal antes de recarregar
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
         } else if (response.status === 422) {
             const result = await response.json();
             const errors = Object.values(result.errors).flat().join('\n');
@@ -139,4 +146,5 @@ document.getElementById('formFuncionario').addEventListener('submit', async func
         });
     }
 });
+
 </script>
