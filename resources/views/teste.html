@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Auto Escola VIP</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #2C2C74;
+            --secondary: #DD0922;
+            --white: #FFFFFF;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--primary);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+        
+        .sidebar .nav-link:hover {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar .nav-link.active {
+            color: var(--white);
+            background-color: var(--secondary);
+        }
+        
+        .logo-container {
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo-text {
+            color: var(--white);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .content-header {
+            background-color: var(--white);
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .page-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #232360;
+            border-color: #232360;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover, .btn-secondary:focus {
+            background-color: #c40820;
+            border-color: #c40820;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            background-color: var(--white);
+            border-bottom: 1px solid #eee;
+            padding: 15px 20px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .table th {
+            background-color: var(--light-gray);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .badge-status-active {
+            background-color: #28a745;
+        }
+        
+        .badge-status-inactive {
+            background-color: var(--secondary);
+        }
+        
+        .btn-circle {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--secondary);
+        }
+        
+        .modal-header {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .dashboard-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dashboard-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .dashboard-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .dashboard-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--dark-gray);
+            border: none;
+            padding: 10px 20px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="logo-container d-flex align-items-center">
+                    <h5 class="logo-text">Auto Escola VIP</h5>
+                </div>
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-people me-2"></i>
+                                Alunos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-person-badge me-2"></i>
+                                Instrutores
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-calendar-check me-2"></i>
+                                Aulas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-car-front me-2"></i>
+                                Veículos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-cash-coin me-2"></i>
+                                Financeiro
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-file-earmark-text me-2"></i>
+                                Relatórios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-gear me-2"></i>
+                                Configurações
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="content-header d-flex justify-content-between align-items-center">
+                    <h2 class="page-title">Dashboard</h2>
+                    <div>
+                        <span class="me-2">Olá, Administrador</span>
+                        <button class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-box-arrow-right"></i> Sair
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Cards -->
+                <div class="row mt-4">
+                    <div class="col-md-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-people dashboard-icon"></i>
+                                <div class="dashboard-number mt-2">156</div>
+                                <div class="dashboard-label">Alunos Ativos</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-person-badge dashboard-icon"></i>
+                                <div class="dashboard-number mt-2">12</div>
+                                <div class="dashboard-label">Instrutores</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-calendar-check dashboard-icon"></i>
+                                <div class="dashboard-number mt-2">48</div>
+                                <div class="dashboard-label">Aulas Hoje</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card dashboard-card">
+                            <div class="card-body text-center">
+                                <i class="bi bi-car-front dashboard-icon"></i>
+                                <div class="dashboard-number mt-2">8</div>
+                                <div class="dashboard-label">Veículos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="instrutores-tab" data-bs-toggle="tab" data-bs-target="#instrutores" type="button" role="tab" aria-controls="instrutores" aria-selected="true">Instrutores</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="alunos-tab" data-bs-toggle="tab" data-bs-target="#alunos" type="button" role="tab" aria-controls="alunos" aria-selected="false">Alunos</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="aulas-tab" data-bs-toggle="tab" data-bs-target="#aulas" type="button" role="tab" aria-controls="aulas" aria-selected="false">Aulas Agendadas</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <!-- Tab Instrutores -->
+                    <div class="tab-pane fade show active" id="instrutores" role="tabpanel" aria-labelledby="instrutores-tab">
+                        <div class="card mt-3">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Gerenciamento de Instrutores</h5>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalInstrutor">
+                                    <i class="bi bi-plus-circle me-2"></i>Novo Instrutor
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>CPF</th>
+                                                <th>Email</th>
+                                                <th>Filial</th>
+                                                <th>Categoria</th>
+                                                <th>Status</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>João Silva</td>
+                                                <td>123.456.789-00</td>
+                                                <td>joao.silva@email.com</td>
+                                                <td>São Mateus</td>
+                                                <td>A/B</td>
+                                                <td><span class="badge bg-success">Ativo</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-circle me-1" title="Editar" data-bs-toggle="modal" data-bs-target="#modalInstrutor">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-circle" title="Desativar">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Maria Santos</td>
+                                                <td>987.654.321-00</td>
+                                                <td>maria.santos@email.com</td>
+                                                <td>Barro Branco</td>
+                                                <td>B</td>
+                                                <td><span class="badge bg-success">Ativo</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-circle me-1" title="Editar" data-bs-toggle="modal" data-bs-target="#modalInstrutor">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-circle" title="Desativar">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pedro Oliveira</td>
+                                                <td>456.789.123-00</td>
+                                                <td>pedro.oliveira@email.com</td>
+                                                <td>São Mateus</td>
+                                                <td>A/B/C</td>
+                                                <td><span class="badge bg-success">Ativo</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-circle me-1" title="Editar" data-bs-toggle="modal" data-bs-target="#modalInstrutor">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-circle" title="Desativar">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Alunos -->
+                    <div class="tab-pane fade" id="alunos" role="tabpanel" aria-labelledby="alunos-tab">
+                        <div class="card mt-3">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Gerenciamento de Alunos</h5>
+                                <button type="button" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle me-2"></i>Novo Aluno
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>CPF</th>
+                                                <th>Email</th>
+                                                <th>Categoria</th>
+                                                <th>Progresso</th>
+                                                <th>Status</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Ana Pereira</td>
+                                                <td>111.222.333-44</td>
+                                                <td>ana.pereira@email.com</td>
+                                                <td>B</td>
+                                                <td>
+                                                    <div class="progress" style="height: 10px;">
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">Ativo</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-circle me-1" title="Editar">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info btn-circle me-1" title="Ver detalhes">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Carlos Mendes</td>
+                                                <td>222.333.444-55</td>
+                                                <td>carlos.mendes@email.com</td>
+                                                <td>A</td>
+                                                <td>
+                                                    <div class="progress" style="height: 10px;">
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">Ativo</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary btn-circle me-1" title="Editar">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info btn-circle me-1" title="Ver detalhes">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Aulas -->
+                    <div class="tab-pane fade" id="aulas" role="tabpanel" aria-labelledby="aulas-tab">
+                        <div class="card mt-3">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Aulas Agendadas para Hoje</h5>
+                                <button type="button" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle me-2"></i>Agendar Aula
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Horário</th>
+                                                <th>Aluno</th>
+                                                <th>Instrutor</th>
+                                                <th>Categoria</th>
+                                                <th>Veículo</th>
+                                                <th>Status</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>08:00 - 09:00</td>
+                                                <td>Ana Pereira</td>
+                                                <td>João Silva</td>
+                                                <td>B</td>
+                                                <td>Gol - ABC-1234</td>
+                                                <td><span class="badge bg-warning text-dark">Agendada</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-success btn-circle me-1" title="Confirmar">
+                                                        <i class="bi bi-check-lg"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-circle" title="Cancelar">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>09:00 - 10:00</td>
+                                                <td>Carlos Mendes</td>
+                                                <td>Maria Santos</td>
+                                                <td>A</td>
+                                                <td>Honda CG - DEF-5678</td>
+                                                <td><span class="badge bg-warning text-dark">Agendada</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-success btn-circle me-1" title="Confirmar">
+                                                        <i class="bi bi-check-lg"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-circle" title="Cancelar">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>10:00 - 11:00</td>
+                                                <td>Juliana Costa</td>
+                                                <td>Pedro Oliveira</td>
+                                                <td>B</td>
+                                                <td>Onix - GHI-9012</td>
+                                                <td><span class="badge bg-success">Confirmada</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-info btn-circle me-1" title="Ver detalhes">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger btn-circle" title="Cancelar">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro/Edição de Instrutor -->
+    <div class="modal fade" id="modalInstrutor" tabindex="-1" aria-labelledby="modalInstrutorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <form id="formInstrutor">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalInstrutorLabel">Cadastro de Instrutor</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            <!-- Tipo -->
+                            <div class="col-md-6">
+                                <label for="tipo" class="form-label required">Tipo</label>
+                                <select name="tipo" id="tipo" class="form-select" required>
+                                    <option value="">Selecione</option>
+                                    <option value="Instrutor" selected>Instrutor</option>
+                                    <option value="Administrativo">Administrativo</option>
+                                    <option value="Recepção">Recepção</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor, selecione um tipo.
+                                </div>
+                            </div>
+
+                            <!-- Permissão -->
+                            <div class="col-md-6">
+                                <label for="permissao" class="form-label required">Permissão</label>
+                                <select name="permissao" id="permissao" class="form-select" required>
+                                    <option value="">Selecione</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Gerente</option>
+                                    <option value="3" selected>Instrutor</option>
+                                    <option value="4">Recepcionista</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor, selecione uma permissão.
+                                </div>
+                            </div>
+
+                            <!-- Código Filial -->
+                            <div class="col-md-6">
+                                <label for="codigo_filial" class="form-label required">Filial</label>
+                                <select name="codigo_filial" id="codigo_filial" class="form-select" required>
+                                    <option value="">Selecione</option>
+                                    <option value="140">São Mateus - 140</option>
+                                    <option value="1140">Barro Branco - 1140</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor, selecione uma filial.
+                                </div>
+                            </div>
+
+                            <!-- Nome -->
+                            <div class="col-md-6">
+                                <label for="nome" class="form-label required">Nome</label>
+                                <input type="text" name="nome" id="nome" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe o nome.
+                                </div>
+                            </div>
+
+                            <!-- CPF -->
+                            <div class="col-md-6">
+                                <label for="cpf" class="form-label required">CPF</label>
+                                <input type="text" name="cpf" id="cpf" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe um CPF válido.
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+                                <label for="email" class="form-label required">E-mail</label>
+                                <input type="email" name="email" id="email" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe um e-mail válido.
+                                </div>
+                            </div>
+
+                            <!-- Categorias -->
+                            <div class="col-md-6">
+                                <label for="categorias" class="form-label required">Categorias Habilitadas</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="A" id="categoriaA" name="categorias[]">
+                                        <label class="form-check-label" for="categoriaA">A</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="B" id="categoriaB" name="categorias[]" checked>
+                                        <label class="form-check-label" for="categoriaB">B</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="C" id="categoriaC" name="categorias[]">
+                                        <label class="form-check-label" for="categoriaC">C</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="D" id="categoriaD" name="categorias[]">
+                                        <label class="form-check-label" for="categoriaD">D</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="E" id="categoriaE" name="categorias[]">
+                                        <label class="form-check-label" for="categoriaE">E</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Telefone -->
+                            <div class="col-md-6">
+                                <label for="telefone" class="form-label required">Telefone</label>
+                                <input type="text" name="telefone" id="telefone" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe um telefone válido.
+                                </div>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="col-md-6">
+                                <label for="status" class="form-label">Status</label>
+                                <select name="status" id="status" class="form-select">
+                                    <option value="Ativo" selected>Ativo</option>
+                                    <option value="Inativo">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Máscara para CPF
+        document.getElementById('cpf').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length > 9) {
+                value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+            } else if (value.length > 6) {
+                value = value.replace(/^(\d{3})(\d{3})(\d{0,3}).*/, '$1.$2.$3');
+            } else if (value.length > 3) {
+                value = value.replace(/^(\d{3})(\d{0,3}).*/, '$1.$2');
+            }
+            
+            e.target.value = value;
+        });
+
+        // Máscara para telefone
+        document.getElementById('telefone').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length > 10) {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            } else if (value.length > 6) {
+                value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            } else if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
+            }
+            
+            e.target.value = value;
+        });
+
+        // Validação do formulário
+        document.getElementById('formInstrutor').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            if (!form.checkValidity()) {
+                event.stopPropagation();
+                form.classList.add('was-validated');
+                return;
+            }
+            
+            // Verificar se pelo menos uma categoria foi selecionada
+            const categorias = document.querySelectorAll('input[name="categorias[]"]:checked');
+            if (categorias.length === 0) {
+                alert('Por favor, selecione pelo menos uma categoria habilitada.');
+                return;
+            }
+            
+            // Simulação de envio do formulário
+            const formData = new FormData(form);
+            const data = {};
+            
+            formData.forEach((value, key) => {
+                if (key === 'categorias[]') {
+                    if (!data.categorias) {
+                        data.categorias = [];
+                    }
+                    data.categorias.push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+            
+            // Aqui você adicionaria o código para enviar os dados para o servidor
+            console.log('Dados do formulário:', data);
+            
+            // Feedback visual de sucesso
+            const modalElement = document.getElementById('modalInstrutor');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+            
+            // Exibir mensagem de sucesso
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show';
+            alertDiv.setAttribute('role', 'alert');
+            alertDiv.innerHTML = `
+                <strong>Sucesso!</strong> Instrutor salvo com sucesso.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            `;
+            
+            document.querySelector('.content-header').insertAdjacentElement('afterend', alertDiv);
+            
+            // Remover alerta após 5 segundos
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+            
+            // Resetar formulário
+            form.reset();
+            form.classList.remove('was-validated');
+            
+            // Recarregar a tabela (simulação)
+            // Na prática, você faria uma chamada AJAX para obter os dados atualizados
+        });
+    </script>
+</body>
+</html>

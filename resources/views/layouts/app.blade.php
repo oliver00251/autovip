@@ -4,122 +4,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Auto Escola VIP</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Painel - Autoescola')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="manifest" href="/manifest.json" />
-<meta name="theme-color" content="#1e90ff" />
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <meta name="theme-color" content="#1e90ff" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <style>
+        :root {
+            --primary: #2C2C74;
+            --secondary: #DD0922;
+            --white: #FFFFFF;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
 
-    @stack('styles')
+        .sidebar {
+            min-height: 100vh;
+            background-color: var(--primary);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+
+        .sidebar .nav-link:hover {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .nav-link.active {
+            color: var(--white);
+            background-color: var(--secondary);
+        }
+
+        .logo-container {
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-text {
+            color: var(--white);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .content-header {
+            background-color: var(--white);
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #232360;
+            border-color: #232360;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            background-color: #c40820;
+            border-color: #c40820;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: var(--white);
+            border-bottom: 1px solid #eee;
+            padding: 15px 20px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .table th {
+            background-color: var(--light-gray);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .badge-status-active {
+            background-color: #28a745;
+        }
+
+        .badge-status-inactive {
+            background-color: var(--secondary);
+        }
+
+        .btn-circle {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--secondary);
+        }
+
+        .modal-header {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .dashboard-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .dashboard-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .dashboard-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .nav-tabs .nav-link {
+            color: var(--dark-gray);
+            border: none;
+            padding: 10px 20px;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            font-weight: 600;
+        }
+    </style>
 </head>
 
 <body>
-    {{-- Navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Autoescola</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                @auth
-                    <ul class="navbar-nav me-auto">
-                       {{--  <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                        </li> --}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cadastro.index') }}">Cadastro</a>
-                        </li>
-                       {{--  <li class="nav-item">
-                            <a class="nav-link" href="{{ route('profile') }}">Perfil</a>
-                        </li> --}}
-                       {{--  <li class="nav-item">
-                            <a class="nav-link" href="{{ route('settings') }}">Configurações</a>
-                        </li> --}}
-                    </ul>
-                    <div class="ms-auto d-flex align-items-center">
-                        <span class="text-white me-3">Olá, {{ Auth::user()->name }}</span>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
-                        </form>
-                    </div>
-                @else
-                    <div class="ms-auto d-flex align-items-center">
-                        <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">Login</a>
-                    </div>
-                @endauth
-            </div>
-        </div>
-    </nav>
-
-
-
     <div class="container-fluid">
         <div class="row">
-            @auth
-                {{-- Sidebar --}}
-                <aside class="col-md-2 bg-light d-none d-md-block p-3 border-end" style="min-height: 100vh;">
-                    @include('layouts.sidebar')
-                </aside>
-            @endauth
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="logo-container d-flex align-items-center">
+                    <h5 class="logo-text">Auto Escola VIP</h5>
+                </div>
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-people me-2"></i>
+                                Alunos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-person-badge me-2"></i>
+                                Instrutores
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-calendar-check me-2"></i>
+                                Aulas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-car-front me-2"></i>
+                                Veículos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-cash-coin me-2"></i>
+                                Financeiro
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-file-earmark-text me-2"></i>
+                                Relatórios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-gear me-2"></i>
+                                Configurações
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-            {{-- Conteúdo principal --}}
-            <main class="col-md p-4">
-                <h4 class="mb-4">@yield('page-title')</h4>
-                @yield('content')
+            <!-- Main Content -->
+            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                 @yield('content')
                 <button id="install-button" style="display: none;">Instalar App</button>
-
-            </main>
-            
+            </div>
         </div>
     </div>
 
-    <footer class="text-center mt-4 mb-2 text-muted small">
-        &copy; {{ date('Y') }} Autoescola - Todos os direitos reservados.
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    @stack('scripts')
-    <style>
-        .bg-dark {
-            --bs-bg-opacity: 1;
-            background-color: #2C2C74 !important
-        }
-
-        th {
-            background: #0d6efd !important;
-            color: #fff !important;
-        }
-
-        #install-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #1e90ff;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  z-index: 9999;
-}
-
-    </style>
-
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 <script>
@@ -160,5 +313,4 @@ installButton.addEventListener('click', () => {
 });
 
 </script>
-
 </html>
