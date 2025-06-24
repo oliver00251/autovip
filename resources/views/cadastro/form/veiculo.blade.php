@@ -2,7 +2,8 @@
 
 @section('content')
     <!-- Main Content -->
-    <div class="container">
+    <div class="container py-5">
+        <h3>Gerenciamento de Frota</h3>
         <!-- Filters Card -->
         <div class="card mb-4">
             <div class="card-header">

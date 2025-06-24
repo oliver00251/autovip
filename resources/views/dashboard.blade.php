@@ -5,7 +5,7 @@
 
 @section('content')
 @auth
-<div class="container-fluid">
+<div class="container-fluid py-5">
 
     <!-- FILTRO POR UNIDADE -->
     <div class="row mb-4">

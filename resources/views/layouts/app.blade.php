@@ -23,6 +23,10 @@
     <link rel="manifest" href="/site.webmanifest" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <style>
         :root {
             --primary: #2C2C74;
@@ -212,31 +216,31 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">
+                                <a class="nav-link active" href="/dashboard">
                                     <i class="bi bi-speedometer2 me-2"></i>
                                     Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('gerenciar.index', ['parametro' => 'alunos']) }}">
                                     <i class="bi bi-people me-2"></i>
                                     Alunos
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('gerenciar.index', ['parametro' => 'funcionarios']) }}">
                                     <i class="bi bi-person-badge me-2"></i>
-                                    Instrutores
+                                    Funcionários
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('aulas.index') }}">
                                     <i class="bi bi-calendar-check me-2"></i>
                                     Aulas
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('veiculos.index') }}">
                                     <i class="bi bi-car-front me-2"></i>
                                     Veículos
                                 </a>
@@ -259,6 +263,13 @@
                                     Configurações
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">
+                                    <i class="bi bi-box-arrow-right me-2"></i>
+                                    Sair
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>

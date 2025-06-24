@@ -186,7 +186,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="#">
                                 <i class="bi bi-speedometer2 me-2"></i>
-                                Dashboard
+                                Dashboard2
                             </a>
                         </li>
                         <li class="nav-item">

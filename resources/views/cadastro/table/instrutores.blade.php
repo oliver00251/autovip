@@ -125,11 +125,26 @@
     </div>
 </div>
 
+
 <!-- Scripts -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Inicializa DataTable
-    
+    if ($('#instrutoresTable').length) {
+    $('#instrutoresTable').DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 5,
+        lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "Todos"]],
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
+        },
+        columnDefs: [
+            { className: "text-center", targets: "_all" }
+        ]
+    });
+}
+
 
         // Instancia os modais Bootstrap
         const modalEditar = new bootstrap.Modal(document.getElementById('modalEditarInstrutor'));

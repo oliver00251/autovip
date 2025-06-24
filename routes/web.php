@@ -5,6 +5,7 @@ use App\Http\Controllers\CadastroController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PlanoAulaController;
 use App\Http\Controllers\VeiculoController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/cadastro', [CadastroController::class, 'index'])->name('cadastro.index');
+    Route::get('/gerenciar/{parametro?}', [CadastroController::class, 'index'])->name('gerenciar.index');
     Route::resource('alunos', AlunoController::class);
     Route::resource('funcionarios', FuncionarioController::class);
  
@@ -45,3 +46,8 @@ Route::get('/veiculos/{veiculo}', [VeiculoController::class, 'show'])->name('vei
 Route::put('/veiculos/{veiculo}', [VeiculoController::class, 'update'])->name('veiculos.update');
 Route::delete('/veiculos/{veiculo}', [VeiculoController::class, 'destroy'])->name('veiculos.destroy');
 
+Route::prefix('aulas')->name('aulas.')->group(function() {
+    Route::get('/', [PlanoAulaController::class, 'index'])->name('index');
+    Route::get('/create', [PlanoAulaController::class, 'create'])->name('create');
+    Route::post('/store', [PlanoAulaController::class, 'store'])->name('store');
+});

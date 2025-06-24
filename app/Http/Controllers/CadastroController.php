@@ -9,11 +9,12 @@ use Illuminate\Http\Request;
 
 class CadastroController extends Controller
 {
-    public function index()
+    public function index($parametro = null)
     {
         $permissao = Role::get();
+        $exibir = $parametro;
         $alunos = Aluno::all();
         $instrutores = Funcionario::get();
-        return view('cadastro.index', compact('permissao','alunos','instrutores'));
+        return view('cadastro.index', compact('permissao','alunos','instrutores','exibir'));
     }
 }

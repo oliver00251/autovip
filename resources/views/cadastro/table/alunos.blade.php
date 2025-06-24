@@ -18,3 +18,17 @@
         @endforeach
     </tbody>
 </table>
+<script>
+    $('#alunosTable').DataTable({
+            responsive: true,
+            autoWidth: false,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "Todos"]],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json'
+            },
+            columnDefs: [
+                { className: "text-center", targets: "_all" }
+            ]
+        });
+</script>
