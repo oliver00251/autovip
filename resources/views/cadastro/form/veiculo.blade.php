@@ -151,12 +151,12 @@
                             <div class="col-md-6">
                                 <label for="placa" class="form-label">Placa*</label>
                                 <input type="text" class="form-control" name="placa" required maxlength="8"
-                                    placeholder="ABC1234" value="ABC1234">
+                                    placeholder="ABC1234" value="">
                             </div>
                             <div class="col-md-6">
                                 <label for="renavam" class="form-label">Renavam*</label>
                                 <input type="text" class="form-control" name="renavam" required maxlength="11"
-                                    placeholder="12345678901" value="12345678901">
+                                    placeholder="12345678901" value="">
                             </div>
                         </div>
 
@@ -165,7 +165,7 @@
                                 <label for="marca" class="form-label">Marca*</label>
                                 <select class="form-select" name="marca" required>
                                     <option value="">Selecione</option>
-                                    <option value="Volkswagen" selected>Volkswagen</option>
+                                    <option value="Volkswagen">Volkswagen</option>
                                     <option value="Fiat">Fiat</option>
                                     <option value="Chevrolet">Chevrolet</option>
                                     <option value="Ford">Ford</option>
@@ -180,7 +180,7 @@
                             <div class="col-md-6">
                                 <label for="modelo" class="form-label">Modelo*</label>
                                 <input type="text" class="form-control" name="modelo" required placeholder="Ex: Gol"
-                                    value="Gol">
+                                    value="">
                             </div>
                         </div>
 
@@ -188,18 +188,18 @@
                             <div class="col-md-4">
                                 <label for="ano" class="form-label">Ano*</label>
                                 <input type="number" class="form-control" name="ano" required min="1900"
-                                    max="2099" placeholder="2023" value="2023">
+                                    max="2099" placeholder="2023" value="">
                             </div>
                             <div class="col-md-4">
                                 <label for="cor" class="form-label">Cor*</label>
                                 <input type="text" class="form-control" name="cor" required
-                                    placeholder="Ex: Branco" value="Branco">
+                                    placeholder="Ex: Branco" value="">
                             </div>
                             <div class="col-md-4">
                                 <label for="status" class="form-label">Status*</label>
                                 <select class="form-select" name="status" required>
                                     <option value="">Selecione</option>
-                                    <option value="Disponível" selected>Disponível</option>
+                                    <option value="Disponível">Disponível</option>
                                     <option value="Em manutenção">Em manutenção</option>
                                     <option value="Em uso">Em uso</option>
                                 </select>
@@ -210,13 +210,13 @@
                             <div class="col-md-6">
                                 <label for="chassi" class="form-label">Chassi*</label>
                                 <input type="text" class="form-control" name="chassi" required maxlength="17"
-                                    placeholder="9BWZZZ377VT004251" value="9BWZZZ377VT004251">
+                                    placeholder="9BWZZZ377VT004251" value="">
                             </div>
                             <div class="col-md-6">
                                 <label for="combustivel" class="form-label">Combustível*</label>
                                 <select class="form-select" name="combustivel" required>
                                     <option value="">Selecione</option>
-                                    <option value="Gasolina" selected>Gasolina</option>
+                                    <option value="Gasolina">Gasolina</option>
                                     <option value="Etanol">Etanol</option>
                                     <option value="Flex">Flex</option>
                                     <option value="Diesel">Diesel</option>
@@ -230,7 +230,7 @@
                         <div class="mb-3">
                             <label for="observacoes" class="form-label">Observações</label>
                             <textarea class="form-control" name="observacoes" rows="3"
-                                placeholder="Informações adicionais sobre o veículo">Veículo para testes</textarea>
+                                placeholder="Informações adicionais sobre o veículo"></textarea>
                         </div>
 
                         <div class="modal-footer">
@@ -239,10 +239,7 @@
                         </div>
                     </form>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="salvarVeiculo">Salvar</button>
+
                 </div>
             </div>
         </div>
