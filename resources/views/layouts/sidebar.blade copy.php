@@ -2,7 +2,7 @@
     $role = auth()->check() ? auth()->user()->name : null;
 @endphp
 
-{{-- <style>
+<style>
     .custom-sidebar {
         background-color: #ffffff;
         border-right: 1px solid #dee2e6;
@@ -108,4 +108,4 @@
         </li>
         @endif
     </ul>
-</div> --}}
+</div>

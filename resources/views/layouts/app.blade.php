@@ -204,67 +204,69 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="logo-container d-flex align-items-center">
-                    <h5 class="logo-text">Auto Escola VIP</h5>
+            @auth
+                <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                    <div class="logo-container d-flex align-items-center">
+                        <h5 class="logo-text">Auto Escola VIP</h5>
+                    </div>
+                    <div class="position-sticky pt-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <i class="bi bi-speedometer2 me-2"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-people me-2"></i>
+                                    Alunos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-person-badge me-2"></i>
+                                    Instrutores
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-calendar-check me-2"></i>
+                                    Aulas
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-car-front me-2"></i>
+                                    Veículos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-cash-coin me-2"></i>
+                                    Financeiro
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-file-earmark-text me-2"></i>
+                                    Relatórios
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-gear me-2"></i>
+                                    Configurações
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="bi bi-speedometer2 me-2"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-people me-2"></i>
-                                Alunos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-person-badge me-2"></i>
-                                Instrutores
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-calendar-check me-2"></i>
-                                Aulas
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-car-front me-2"></i>
-                                Veículos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-cash-coin me-2"></i>
-                                Financeiro
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-file-earmark-text me-2"></i>
-                                Relatórios
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-gear me-2"></i>
-                                Configurações
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            @endauth
 
             <!-- Main Content -->
-            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                 @yield('content')
+            <div class="col-md ms-sm-auto col-lg px-md-4">
+                @yield('content')
                 <button id="install-button" style="display: none;">Instalar App</button>
             </div>
         </div>
@@ -276,41 +278,41 @@
 
 </body>
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('SW registrado:', reg.scope))
-      .catch(err => console.error('Falha no SW:', err));
-  });
-}
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(reg => console.log('SW registrado:', reg.scope))
+                .catch(err => console.error('Falha no SW:', err));
+        });
+    }
 
-let deferredPrompt;
-const installButton = document.getElementById('install-button');
+    let deferredPrompt;
+    const installButton = document.getElementById('install-button');
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Impede o prompt automático
-  e.preventDefault();
-  deferredPrompt = e;
-  // Exibe o botão
-  installButton.style.display = 'block';
-});
-
-installButton.addEventListener('click', () => {
-  // Esconde o botão
-  installButton.style.display = 'none';
-  // Mostra o prompt de instalação
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('Usuário aceitou instalar o app');
-      } else {
-        console.log('Usuário recusou instalar o app');
-      }
-      deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Impede o prompt automático
+        e.preventDefault();
+        deferredPrompt = e;
+        // Exibe o botão
+        installButton.style.display = 'block';
     });
-  }
-});
 
+    installButton.addEventListener('click', () => {
+        // Esconde o botão
+        installButton.style.display = 'none';
+        // Mostra o prompt de instalação
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('Usuário aceitou instalar o app');
+                } else {
+                    console.log('Usuário recusou instalar o app');
+                }
+                deferredPrompt = null;
+            });
+        }
+    });
 </script>
+
 </html>
