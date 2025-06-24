@@ -77,7 +77,7 @@
 <!-- Modal de cadastro do plano -->
 <div class="modal fade" id="modalCriarPlano" tabindex="-1" aria-labelledby="modalCriarPlanoLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-    <form action="{{ route('aulas.store') }}" method="POST" class="modal-content">
+    <form action="{{-- {{ route('aulas.store') }} --}}" method="POST" class="modal-content">
       @csrf
       <div class="modal-header">
         <h5 class="modal-title" id="modalCriarPlanoLabel">Cadastrar Novo Plano de Aula</h5>
