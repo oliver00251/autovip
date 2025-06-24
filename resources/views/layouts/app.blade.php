@@ -24,9 +24,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <!-- DataTables CSS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-<!-- DataTables JS -->
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <style>
         :root {
             --primary: #2C2C74;
@@ -211,7 +211,11 @@
             @auth
                 <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                     <div class="logo-container d-flex align-items-center">
-                        <h5 class="logo-text">Auto Escola VIP</h5>
+                        <div class="bg-white w-75 rounded py-2">
+                            <img src="https://autoescolavip.com.br/wp-content/uploads/2022/01/WhatsApp_Image_2022-01-27_at_11.03.42-removebg-preview.png"
+                                alt="Logo" width="120">
+                        </div>
+
                     </div>
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
